@@ -3,3 +3,4 @@ whois
 nslookup
 curl
 awk
+subfinder 
