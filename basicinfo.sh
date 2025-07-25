@@ -39,6 +39,13 @@ crtsh_scan() {
 }
 
 
+subfinder_scan() {
+	echo "${RED}subfinder enumeration...............${END}"
+	subfinder -d ${DOMAIN} -all -recursive > rawdata/subfinder_scan.txt
+	echo "${GREEN}Completed.${END}"
+}
+
+
 repeat() {
 	for i in {1..50}; do echo -n "-"; done
 }
@@ -49,11 +56,13 @@ nslookup_scan
 nmap_scan
 whois_scan
 crtsh_scan
+subfinder_scan
 
 NSLOOKUP_FILE="${pwd}rawdata/nslookup_scan.txt"
 NMAP_FILE="${pwd}rawdata/nmap_scan.txt"
 WHOIS_FILE="${pwd}rawdata/whois_scan.txt"
 CRTSH_FILE="${pwd}rawdata/crtsh.txt"
+SUBFINDER_FILE="${pwd}rawdata/subfinder_scan.txt"
 
 
 #filtered format for nslookup
@@ -123,6 +132,15 @@ awk '{
     $0 = substr($0, RSTART + RLENGTH)
   }
 }' "$CRTSH_FILE"| sort -u 
+
+
+#filtered format for subfinder lookup
+echo -e ""
+repeat 
+echo -e "\n${GREEN}subfinder lookup${END}" 
+repeat
+echo -e ""
+cat $SUBFINDER_FILE
 
 
 repeat 
