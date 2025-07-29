@@ -121,7 +121,7 @@ echo -e ""
 }' "$WHOIS_FILE"
 
 
-#filtered format for crtsh lookup
+#filtered format for crtsh and subfinder lookup
 echo -e ""
 repeat 
 echo -e "\n${GREEN}crtsh and subfinder lookup(subdomains)${END}" 
@@ -134,14 +134,6 @@ awk '{
   }
 }' "$CRTSH_FILE"| sort -u > rawdata/subdomains.txt
 sort -u $SUBDOMAIN $SUBFINDER_FILE
-
-#filtered format for subfinder lookup
-echo -e ""
-repeat 
-echo -e "\n${GREEN}subfinder lookup${END}" 
-repeat
-echo -e ""
-cat $SUBFINDER_FILE
 
 
 repeat 
