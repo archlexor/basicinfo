@@ -5,7 +5,7 @@ BLUE='\e[34m'
 RED='\e[31m'
 END='\033[0m'
 
-echo "Enter your domain(example.com): "
+echo -e "Enter your domain(example.com): "
 read DOMAIN
 
 mkdir rawdata
@@ -13,36 +13,36 @@ mkdir rawdata
 #---------------------------------------FUNCTIONS----------------------------------------
 
 nslookup_scan() {
-	echo "${RED}nslookup enumeration.............${END}"
+	echo -e "${RED}nslookup enumeration.............${END}"
 	nslookup $DOMAIN > rawdata/nslookup_scan.txt
-	echo "${GREEN}Completed."
+	echo -e "${GREEN}Completed."
 }
 
 nmap_scan() {
-	echo "${RED}nmap enumeration.............${END}"
+	echo -e "${RED}nmap enumeration.............${END}"
 	nmap -sV -sC -v $DOMAIN > rawdata/nmap_scan.txt
-	echo "${GREEN}Completed."
+	echo -e "${GREEN}Completed."
 }
 
 
 whois_scan() {	
-	echo "${RED}whois enumeration.............${END}"
+	echo -e "${RED}whois enumeration.............${END}"
 	whois $DOMAIN > rawdata/whois_scan.txt
-	echo "${GREEN}Completed."
+	echo -e "${GREEN}Completed."
 }
 
 
 crtsh_scan() {
-	echo "${RED}crtsh enumeration.............${END}"
+	echo -e "${RED}crtsh enumeration.............${END}"
 	curl https://crt.sh/?q=${DOMAIN} -o rawdata/crtsh.txt
-	echo "${GREEN}Completed."
+	echo -e "${GREEN}Completed."
 }
 
 
 subfinder_scan() {
-	echo "${RED}subfinder enumeration...............${END}"
+	echo -e "${RED}subfinder enumeration...............${END}"
 	subfinder -d ${DOMAIN} -all -recursive > rawdata/subfinder_scan.txt
-	echo "${GREEN}Completed.${END}"
+	echo -e"${GREEN}Completed.${END}"
 }
 
 
