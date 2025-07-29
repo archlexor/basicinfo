@@ -63,6 +63,7 @@ NMAP_FILE="${pwd}rawdata/nmap_scan.txt"
 WHOIS_FILE="${pwd}rawdata/whois_scan.txt"
 CRTSH_FILE="${pwd}rawdata/crtsh.txt"
 SUBFINDER_FILE="${pwd}rawdata/subfinder_scan.txt"
+SUBDOMAIN="${pwd}rawdata/subdomains"
 
 
 #filtered format for nslookup
@@ -100,7 +101,7 @@ awk '/^[0-9]+\/tcp[ \t]+(closed|filtered)/ {
 #filtered format for whois lookup
 echo -e ""
 repeat 
-echo -e "\n${GREEN}nslookup${END}" 
+echo -e "\n${GREEN}whois lookup${END}" 
 repeat 
 echo -e ""
  awk '{
@@ -123,7 +124,7 @@ echo -e ""
 #filtered format for crtsh lookup
 echo -e ""
 repeat 
-echo -e "\n${GREEN}crtsh lookup${END}" 
+echo -e "\n${GREEN}crtsh and subfinder lookup(subdomains)${END}" 
 repeat 
 echo -e ""
 awk '{          
@@ -131,8 +132,8 @@ awk '{
     print a[1]
     $0 = substr($0, RSTART + RLENGTH)
   }
-}' "$CRTSH_FILE"| sort -u 
-
+}' "$CRTSH_FILE"| sort -u > rawdata/subdomains.txt
+sort -u $SUBDOMAIN $SUBFINDER_FILE
 
 #filtered format for subfinder lookup
 echo -e ""
